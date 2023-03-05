@@ -140,4 +140,4 @@ server <- function(input, output, session){
 
 shinyApp(ui = ui, server = server)
 
-runUrl("http://127.0.0.1:3635/")
+
