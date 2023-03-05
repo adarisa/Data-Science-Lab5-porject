@@ -1,0 +1,4 @@
+"fullname","temperature","flu_status","gender","symptoms","temperature.1","flu_status.1","gender.1","symptoms.1","stringAsFactors"
+"Adarisa",97.5,FALSE,"MALE","SEVERE",97.5,FALSE,"MALE","SEVERE",FALSE
+"Adarisa",97.5,FALSE,"MALE","SEVERE",90.1,FALSE,"FEMALE","MILD",FALSE
+"Adarisa",97.5,FALSE,"MALE","SEVERE",93.1,FALSE,"MALE","MODERATE",FALSE
