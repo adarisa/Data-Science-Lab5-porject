@@ -1,7 +1,3 @@
-#upload file
-#download file
-#timer
-#share the link
 library(shiny)
 
 song <- read.csv("Song.csv", stringsAsFactors = FALSE, header = TRUE)
@@ -60,7 +56,7 @@ ui <- fluidPage(
              titlePanel("Downloading Data"),
              sidebarLayout(
                sidebarPanel(
-                 selectInput("dataset", "Choose a dataset:",
+                 selectInput("dataset2", "Choose a dataset:",
                              choices = c("Song", "Patient")),
                  downloadButton("downloadData", "Download")
                ),
@@ -86,12 +82,7 @@ server <- function(input, output, session){
            )
   })
   
-  setInput <- reactive({
-    switch(input$dataset,
-           "Song" = song,
-           "Patient"= patient)
-  })
-  
+ 
   
   output$summary <- renderPrint({
     dataset <- datasetInput()
@@ -115,18 +106,23 @@ server <- function(input, output, session){
       return(df)
     }
   })
-
+  datasetInput <- reactive({
+    switch(input$dataset2,
+           "Song" = song,
+           "Patient" = patient
+    )
+  })
   
   output$table <- renderTable({
-    setInput()
+    datasetInput()
   })
   
   output$downloadData <- downloadHandler(
     filename = function() {
-      paste(setInput, ".csv", sep = "")
+      paste(input$dataset2, ".csv", sep = "")
     },
     content = function(file) {
-      write.csv(input$dataset, file, row.names = FALSE)
+      write.csv(datasetInput, file, row.names = FALSE)
     })
   
   output$currentTime <- renderText({
@@ -134,10 +130,9 @@ server <- function(input, output, session){
     paste("The current time is", Sys.time())
   })
   
-
-  
 }
 
 shinyApp(ui = ui, server = server)
+
 
 
